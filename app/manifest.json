@@ -1,0 +1,46 @@
+{
+  "name": "Gulp Chrome Extension",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "minimum_chrome_version": "23",
+  "description": "Gulp Chrome Extension Description",
+  "icons": {
+    "16": "assets/images/icon-16.png",
+    "128": "assets/images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "assets/scripts/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/images/icon-19.png",
+      "38": "assets/images/icon-38.png"
+    },
+    "default_title": "Gulp Chrome Extension",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "assets/styles/application.css"
+      ],
+      "js": [
+        "assets/scripts/application.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ]
+}
