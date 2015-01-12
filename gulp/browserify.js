@@ -1,13 +1,15 @@
 var gulp     = require( 'gulp' ),
-  browserify = require( 'browserify' ),
+  browserify = require( 'gulp-browserify' ),
   source     = require( 'vinyl-source-stream' ),
   notify     = require( 'gulp-notify' );
 
 module.exports = function() {
 
-  browserify( [ './source/scripts/application.js' ] )
-    .bundle()
-    .pipe( source( 'application.js' ) )
+  gulp.src( './source/scripts/*.js' )
+    .pipe(browserify({
+      insertGlobals : false,
+      debug         : false
+    }))
     .pipe( gulp.dest( './app/assets/scripts' ) )
     .pipe( notify( { message: "browserify executed!" } ) );
 

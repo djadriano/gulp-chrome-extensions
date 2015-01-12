@@ -1,11 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
   <title>Gulp Chrome Extension</title>
   <link rel="stylesheet" href="assets/styles/application.css">
 </head>
-<body>
-  <h1>Gulp Chrome Extension teste</h1>
+<body ng-app="gpe">
+  <main class="app-content">
+    <div class="tp" tp-directive>
+      <p ng-repeat="item in tp">
+        TP: <input type="number" ng-model="item.value"> [ <a ng-click="addTp()">add</a> ]
+      </p>
+      <p>
+        Comissão: <input type="number" ng-model="comission"> %
+      </p>
+      <p>
+        Total: <b class="top-total">{{ tptotal() }}</b>
+      </p>
+    </div>
+    <hr>
+    <div class="oop" oop-directive>
+      <p>
+        OOP: <input type="number">
+      </p>
+      <p>
+        Total: <b class="top-total">0</b><br>
+        Comissão: <b class="top-total">0</b><br>
+        Total +  Comissão: <b class="top-total">0</b><br>
+        Valor Bruto: <b class="top-total">0</b><br>
+      </p>
+    </div>
+    <hr>
+    <div class="tg" tg-directive>
+      <p>
+        Third Party: <b class="top-total">{{ tptotal() }}</b><br>
+        OOP: <b class="top-total">0</b><br>
+        Comissão: <b class="top-total">0</b><br>
+        Taxes: <b class="top-total">0</b><br>
+        Total: <b class="top-total">0</b>
+      </p>
+    </div>
+  </main>
+
+  <script src="assets/scripts/application.js"></script>
 </body>
 </html>
