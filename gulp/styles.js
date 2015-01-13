@@ -4,7 +4,7 @@ var gulp  = require( 'gulp' ),
 
 module.exports = function() {
 
-  gulp.src( './source/styles/*.scss' )
+  gulp.src( './source/styles/**/*.scss' )
     .pipe(compass({
       config_file: 'config.rb',
       css        : 'app/assets/styles',

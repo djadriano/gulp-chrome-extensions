@@ -1,5 +1,3 @@
-require( 'angular/angular' );
-
 'use strict';
 
 module.exports = angular.module('gpe.tp', [])
@@ -11,7 +9,7 @@ module.exports = angular.module('gpe.tp', [])
 
     $scope.comission = 0;
 
-    $scope.tptotal = function() {
+    $scope.getTp = function() {
 
       var total = 0;
 
@@ -19,23 +17,32 @@ module.exports = angular.module('gpe.tp', [])
         total = total + item.value
       });
 
-      return total * $scope.comission;
+      return total;
 
+    }
+
+    $scope.getTpComission = function() {
+      return ( $scope.getTp() * $scope.comission / 100 );
+    };
+
+    $scope.getTpWithComission = function() {
+      return parseInt( $scope.getTp() + $scope.getTpComission() );
     };
 
     $scope.addTp = function() {
       $scope.tp.push({ value: 0 });
     };
 
+    $scope.removeTp = function( index ) {
+      if( index > 0 ) {
+        $scope.tp.splice( index, 1 );
+      }
+    };
+
   }])
   .directive('tpDirective', function() {
     return {
       restrict  : 'A',
-      controller: 'gpe.tp.controller',
-      link      : function( scope, element, attrs ) {
-
-        console.log('tpDirective');
-
-      }
+      controller: 'gpe.tp.controller'
     };
   });

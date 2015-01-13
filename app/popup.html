@@ -7,37 +7,41 @@
 </head>
 <body ng-app="gpe">
   <main class="app-content">
-    <div class="tp" tp-directive>
+    <div class="tp sections" tp-directive>
       <p ng-repeat="item in tp">
-        TP: <input type="number" ng-model="item.value"> [ <a ng-click="addTp()">add</a> ]
+        TP: <input type="number" ng-model="item.value"> [ <a ng-click="addTp()">add</a> ] [ <a ng-click="removeTp( $index )">remove</a> ]
       </p>
       <p>
         Comissão: <input type="number" ng-model="comission"> %
       </p>
       <p>
-        Total: <b class="top-total">{{ tptotal() }}</b>
+        Total: <b class="top-total">{{ getTpWithComission() | currency }}</b>
       </p>
     </div>
-    <hr>
-    <div class="oop" oop-directive>
-      <p>
-        OOP: <input type="number">
+    <div class="oop sections" oop-directive>
+      <p ng-repeat="item_oop in oop">
+        OOP: <input type="number" ng-model="item_oop.value"> [ <a ng-click="addOop()">add</a> ]
       </p>
       <p>
-        Total: <b class="top-total">0</b><br>
-        Comissão: <b class="top-total">0</b><br>
-        Total +  Comissão: <b class="top-total">0</b><br>
-        Valor Bruto: <b class="top-total">0</b><br>
+        Comissão: <input type="number" ng-model="oop_comission"> %
+      </p>
+      <p>
+        Taxa: <input type="number" ng-model="oop_taxes"> %
+      </p>
+      <p>
+        Total: <b class="top-total">{{ getOop() | currency }}</b><br>
+        Total +  Comissão: <b class="top-total">{{ getOopWithComission() | currency }}</b><br>
+        Valor Bruto: <b class="top-total">{{ getOopBruto() | currency }}</b><br>
+        Valor Taxa: <b class="top-total">{{ getOopWithTaxes() | currency }}</b><br>
       </p>
     </div>
-    <hr>
-    <div class="tg" tg-directive>
+    <div class="tg sections" tg-directive>
       <p>
-        Third Party: <b class="top-total">{{ tptotal() }}</b><br>
-        OOP: <b class="top-total">0</b><br>
-        Comissão: <b class="top-total">0</b><br>
-        Taxes: <b class="top-total">0</b><br>
-        Total: <b class="top-total">0</b>
+        Third Party: <b class="top-total">{{ getTpWithComission() | currency }}</b><br>
+        OOP: <b class="top-total">{{ getOop() | currency }}</b><br>
+        Comissão: <b class="top-total">{{ getTgComission() | currency }}</b><br>
+        Taxes: <b class="top-total">{{ getTgTaxes() | currency }}</b><br>
+        Total: <b class="top-total">{{ getTgTotal() | currency }}</b>
       </p>
     </div>
   </main>

@@ -26075,38 +26075,101 @@ var styleDirective = valueFn({
 module.exports = angular.module('gpe.oop', [])
   .controller('gpe.oop.controller', ['$scope', function( $scope ) {
 
-    console.log('gpe.oop.controller');
+    $scope.oop = [
+      { value: 0 }
+    ];
+
+    $scope.oop_comission = 0;
+    $scope.oop_taxes     = 0;
+
+    $scope.getOop = function() {
+
+      var total = 0;
+
+      $scope.oop.forEach(function( item, count ) {
+        total = total + item.value
+      });
+
+      return total;
+
+    };
+
+    $scope.getOopComission = function() {
+      return ( $scope.getOop() * $scope.oop_comission / 100 );
+    };
+
+    $scope.getOopTaxes = function() {
+      return ( $scope.getOopBruto() * $scope.oop_taxes / 100 );
+    };
+
+    $scope.getOopWithComission = function() {
+      return ( $scope.getOop() + $scope.getOopComission() );
+    };
+
+    $scope.getOopBruto = function() {
+
+      var calc = ( $scope.getOopWithComission() / 0.95 );
+
+      return calc;
+
+    };
+
+    $scope.getOopWithTaxes = function() {
+      return ( $scope.getOopBruto() + $scope.getOopTaxes() );
+    };
+
+    $scope.addOop = function() {
+      $scope.oop.push({ value: 0 });
+    };
 
   }])
   .directive('oopDirective', function() {
     return {
       restrict  : 'A',
-      controller: 'gpe.oop.controller',
-      link      : function( scope, element, attrs ) {
-
-        console.log('oopDirective');
-
-      }
+      controller: 'gpe.oop.controller'
     }
   });
 },{}],3:[function(require,module,exports){
 'use strict';
 
 module.exports = angular.module('gpe.tg', [])
+  .controller('gpe.tg.controller', ['$scope', function( $scope ) {
+
+    $scope.getTgTotal = function() {
+
+      var total_tp  = $scope.getTpWithComission(),
+          total_oop = $scope.getOopBruto();
+
+      return ( total_tp + total_oop );
+
+    };
+
+    $scope.getTgComission = function() {
+
+      var tp_comission  = $scope.getTpComission(),
+          oop_comission = $scope.getOopComission();
+
+      return ( tp_comission + oop_comission );
+
+    };
+
+    $scope.getTgTaxes = function() {
+
+      var oop_taxes = $scope.getOopTaxes();
+
+      return oop_taxes;
+
+    };
+
+  }])
   .directive('tgDirective', function() {
     return {
       restrict  : 'A',
-      require   : '^?tpDirective',
-      link      : function( scope, element, attrs, tpCtrl ) {
-
-        console.log('tgDirective');
-
-      }
+      controller: 'gpe.tg.controller',
+      require   : ['^?tpDirective','^?oopDirective']
     };
   });
 },{}],4:[function(require,module,exports){
-require( 'angular/angular' );
-
 'use strict';
 
 module.exports = angular.module('gpe.tp', [])
@@ -26118,7 +26181,7 @@ module.exports = angular.module('gpe.tp', [])
 
     $scope.comission = 0;
 
-    $scope.tptotal = function() {
+    $scope.getTp = function() {
 
       var total = 0;
 
@@ -26126,27 +26189,36 @@ module.exports = angular.module('gpe.tp', [])
         total = total + item.value
       });
 
-      return total * $scope.comission;
+      return total;
 
+    }
+
+    $scope.getTpComission = function() {
+      return ( $scope.getTp() * $scope.comission / 100 );
+    };
+
+    $scope.getTpWithComission = function() {
+      return parseInt( $scope.getTp() + $scope.getTpComission() );
     };
 
     $scope.addTp = function() {
       $scope.tp.push({ value: 0 });
     };
 
+    $scope.removeTp = function( index ) {
+      if( index > 0 ) {
+        $scope.tp.splice( index, 1 );
+      }
+    };
+
   }])
   .directive('tpDirective', function() {
     return {
       restrict  : 'A',
-      controller: 'gpe.tp.controller',
-      link      : function( scope, element, attrs ) {
-
-        console.log('tpDirective');
-
-      }
+      controller: 'gpe.tp.controller'
     };
   });
-},{"angular/angular":1}],5:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 require( 'angular/angular' );
 
 var tp  = require( './directives/tp' );
