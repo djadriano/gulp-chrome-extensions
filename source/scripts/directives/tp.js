@@ -4,10 +4,10 @@ module.exports = angular.module('gpe.tp', [])
   .controller('gpe.tp.controller', ['$scope', function( $scope ) {
 
     $scope.tp = [
-      { value: 0 }
+      { value: '' }
     ];
 
-    $scope.comission = 0;
+    $scope.comission = '';
 
     $scope.getTp = function() {
 
@@ -30,7 +30,7 @@ module.exports = angular.module('gpe.tp', [])
     };
 
     $scope.addTp = function() {
-      $scope.tp.push({ value: 0 });
+      $scope.tp.push({ value: '' });
     };
 
     $scope.removeTp = function( index ) {

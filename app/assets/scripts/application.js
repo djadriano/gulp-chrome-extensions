@@ -26076,11 +26076,11 @@ module.exports = angular.module('gpe.oop', [])
   .controller('gpe.oop.controller', ['$scope', function( $scope ) {
 
     $scope.oop = [
-      { value: 0 }
+      { value: '' }
     ];
 
-    $scope.oop_comission = 0;
-    $scope.oop_taxes     = 0;
+    $scope.oop_comission = '';
+    $scope.oop_taxes     = '';
 
     $scope.getOop = function() {
 
@@ -26119,7 +26119,13 @@ module.exports = angular.module('gpe.oop', [])
     };
 
     $scope.addOop = function() {
-      $scope.oop.push({ value: 0 });
+      $scope.oop.push({ value: '' });
+    };
+
+    $scope.removeOop = function( index ) {
+      if( index > 0 ) {
+        $scope.oop.splice( index, 1 );
+      }
     };
 
   }])
@@ -26176,10 +26182,10 @@ module.exports = angular.module('gpe.tp', [])
   .controller('gpe.tp.controller', ['$scope', function( $scope ) {
 
     $scope.tp = [
-      { value: 0 }
+      { value: '' }
     ];
 
-    $scope.comission = 0;
+    $scope.comission = '';
 
     $scope.getTp = function() {
 
@@ -26202,7 +26208,7 @@ module.exports = angular.module('gpe.tp', [])
     };
 
     $scope.addTp = function() {
-      $scope.tp.push({ value: 0 });
+      $scope.tp.push({ value: '' });
     };
 
     $scope.removeTp = function( index ) {

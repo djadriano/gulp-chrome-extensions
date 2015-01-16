@@ -19,8 +19,7 @@
       "19": "assets/images/icon-19.png",
       "38": "assets/images/icon-38.png"
     },
-    "default_title": "Gulp Chrome Extension",
-    "default_popup": "popup.html"
+    "default_title": "Gulp Chrome Extension"
   },
   "content_scripts": [
     {
@@ -34,7 +33,6 @@
       "js": [
         "assets/scripts/application.js"
       ],
-      "run_at": "document_end",
       "all_frames": false
     }
   ],
