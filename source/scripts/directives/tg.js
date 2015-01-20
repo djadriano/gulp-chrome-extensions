@@ -29,11 +29,23 @@ module.exports = angular.module('gpe.tg', [])
 
     };
 
+    $scope.getTgFee = function() {
+
+      var fee_taxes = $scope.getFee();
+
+      return fee_taxes;
+
+    };
+
   }])
   .directive('tgDirective', function() {
     return {
       restrict  : 'A',
       controller: 'gpe.tg.controller',
-      require   : ['^?tpDirective','^?oopDirective']
+      require   : [
+        '^?tpDirective',
+        '^?oopDirective',
+        '^?feeDirective'
+      ]
     };
   });

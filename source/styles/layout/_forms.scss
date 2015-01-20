@@ -1,0 +1,15 @@
+.gpe-sections {
+  input[type="text"],
+  input[type="number"] {
+    border: 0;
+    border-bottom: 1px solid #e9e9e9;
+    outline: 0;
+    padding: rem(10px);
+    color: #333;
+  }
+}
+
+.gpe-sections-fields-label {
+  display: block;
+  flex: 1 0 100%;
+}

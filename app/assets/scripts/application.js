@@ -26072,6 +26072,79 @@ var styleDirective = valueFn({
 },{}],2:[function(require,module,exports){
 'use strict';
 
+module.exports = angular.module('gpe.fee', [])
+  .controller('gpe.fee.controller', ['$scope', function( $scope ) {
+
+    $scope.fee = [
+      {
+        dep   : '',
+        hr    : '',
+        hours : '',
+        budget: ''
+      }
+    ];
+
+    $scope.fee_taxes = '';
+
+    $scope.getFee = function() {
+
+      var total = 0;
+
+      $scope.fee.forEach(function( item, count ) {
+        total = total + item.budget
+      });
+
+      return total;
+
+    };
+
+    $scope.getFeeImposto = function() {
+      return ( $scope.getFee() / 0.95 );
+    };
+
+    $scope.getFeeTaxes = function() {
+      return ( $scope.getFeeImposto() * $scope.fee_taxes / 100 );
+    };
+
+    $scope.getFeeWithTaxes = function() {
+      return ( $scope.getFee() + $scope.getFeeTaxes() );
+    };
+
+    $scope.getBudget = function( index ) {
+
+      var item = $scope.fee[ index ];
+
+      item.budget = ( item.hours * item.hr );
+
+      return item.budget;
+
+    };
+
+    $scope.addFee = function() {
+      $scope.fee.push({
+        dep   : '',
+        hr    : '',
+        hours : '',
+        budget: ''
+      });
+    };
+
+    $scope.removeFee = function( index ) {
+      if( index > 0 ) {
+        $scope.fee.splice( index, 1 );
+      }
+    };
+
+  }])
+  .directive('feeDirective', function() {
+    return {
+      restrict  : 'A',
+      controller: 'gpe.fee.controller'
+    }
+  });
+},{}],3:[function(require,module,exports){
+'use strict';
+
 module.exports = angular.module('gpe.oop', [])
   .controller('gpe.oop.controller', ['$scope', function( $scope ) {
 
@@ -26135,7 +26208,7 @@ module.exports = angular.module('gpe.oop', [])
       controller: 'gpe.oop.controller'
     }
   });
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 'use strict';
 
 module.exports = angular.module('gpe.tg', [])
@@ -26167,15 +26240,27 @@ module.exports = angular.module('gpe.tg', [])
 
     };
 
+    $scope.getTgFee = function() {
+
+      var fee_taxes = $scope.getFee();
+
+      return fee_taxes;
+
+    };
+
   }])
   .directive('tgDirective', function() {
     return {
       restrict  : 'A',
       controller: 'gpe.tg.controller',
-      require   : ['^?tpDirective','^?oopDirective']
+      require   : [
+        '^?tpDirective',
+        '^?oopDirective',
+        '^?feeDirective'
+      ]
     };
   });
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
 
 module.exports = angular.module('gpe.tp', [])
@@ -26224,16 +26309,18 @@ module.exports = angular.module('gpe.tp', [])
       controller: 'gpe.tp.controller'
     };
   });
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 require( 'angular/angular' );
 
-var tp  = require( './directives/tp' );
+var tp  = require( './directives/tp'  );
 var oop = require( './directives/oop' );
+var fee = require( './directives/fee' );
 var tg  = require( './directives/tg'  );
 
 angular.module('gpe', [
   tp.name,
   oop.name,
+  fee.name,
   tg.name
 ]);
-},{"./directives/oop":2,"./directives/tg":3,"./directives/tp":4,"angular/angular":1}]},{},[5])
+},{"./directives/fee":2,"./directives/oop":3,"./directives/tg":4,"./directives/tp":5,"angular/angular":1}]},{},[6])

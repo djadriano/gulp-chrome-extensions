@@ -1,0 +1,14 @@
+.gpe-button {
+  border-radius: 100%;
+  color: #fff;
+  padding: rem(5px) rem(10px);
+  cursor: pointer;
+
+  &.add {
+    background: #666;
+  }
+
+  &.remove {
+    background: red;
+  }
+}

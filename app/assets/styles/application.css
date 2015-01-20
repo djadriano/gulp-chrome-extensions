@@ -403,10 +403,6 @@ th {
 /* ==========================================================================
    Utils
    ========================================================================== */
-* {
-  box-sizing: border-box;
-}
-
 body {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
@@ -420,36 +416,9 @@ h1, h2, h3, h4, h5, h6 {
   line-height: normal;
 }
 
-.gpe-header {
-  background: #03A9F4;
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  padding: 1.25rem;
-}
-.gpe-header .header-app-values {
-  width: 100%;
-  text-align: center;
-}
-.gpe-header .header-app-values thead {
-  color: #ffffff;
-}
-.gpe-header .header-app-values thead td {
-  text-transform: uppercase;
-  font-weight: bold;
-}
-.gpe-header .header-app-values tbody {
-  color: #B3E5FC;
-}
-.gpe-header .header-app-values tbody td {
-  padding-top: 0.625rem;
-  width: 12.5%;
-}
-
 .gpe-content {
-  width: 250rem;
-  margin-top: 5.4375rem;
+  width: 100%;
+  margin-top: 5.3125rem;
 }
 
 .gpe-sections {
@@ -464,25 +433,11 @@ h1, h2, h3, h4, h5, h6 {
 .gpe-sections .gpe-sections-header .gpe-sections-header-title {
   color: #999;
   font-size: 1rem;
+  text-transform: uppercase;
 }
 .gpe-sections .gpe-sections-content {
   padding: 1.25rem;
   color: #999;
-}
-.gpe-sections .gpe-sections-fields {
-  margin-bottom: 0.625rem;
-}
-.gpe-sections .gpe-sections-fields:last-child {
-  margin-bottom: 0;
-}
-.gpe-sections input[type="text"],
-.gpe-sections input[type="number"] {
-  border: 0;
-  border-bottom: 1px solid #e9e9e9;
-  outline: 0;
-  padding: 0.625rem;
-  color: #333;
-  margin-right: 0.625rem;
 }
 .gpe-sections .gpe-sections-item-actions-remove {
   display: none;
@@ -491,17 +446,124 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-block;
 }
 
-.v-center {
+.gpe-sections-fields-actions {
+  margin-left: 0.625rem;
+}
+
+.tp,
+.oop {
+  flex: 0 1 50%;
+}
+
+.fee {
+  flex: 0 1 100%;
+}
+
+.flex {
   display: flex;
+}
+
+.v-center {
+  justify-content: flex-start;
   align-items: center;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.form-fields {
+  flex: 0 0 100%;
+  margin-bottom: 1.25rem;
+}
+.form-fields .label {
+  flex: 0 0 100%;
+  margin-bottom: 0.625rem;
+}
+.form-fields.col-2 {
+  flex: 0 0 auto;
+}
+.form-fields.column {
+  flex: 0 0 auto;
+  padding-right: 2%;
+}
+.form-fields.column:last-child {
+  padding-right: 0;
+}
+.form-fields label {
+  font-weight: bold;
+}
+.form-fields input {
+  border: 1px solid #999;
 }
 
 /* ==========================================================================
    Components
    ========================================================================== */
+.gpe-button {
+  border-radius: 100%;
+  color: #fff;
+  padding: 0.3125rem 0.625rem;
+  cursor: pointer;
+}
+.gpe-button.add {
+  background: #666;
+}
+.gpe-button.remove {
+  background: red;
+}
+
 /* ==========================================================================
    Layout
    ========================================================================== */
+.gpe-header {
+  background: #03A9F4;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+.gpe-header .header-app-values {
+  width: 100%;
+  text-align: center;
+}
+.gpe-header .header-app-values thead {
+  color: #ffffff;
+}
+.gpe-header .header-app-values thead td {
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 1.25rem 1.25rem 0.3125rem 1.25rem;
+}
+.gpe-header .header-app-values thead td.header-app-values-fee {
+  background: #14b4fc;
+}
+.gpe-header .header-app-values tbody {
+  color: #ace4fe;
+}
+.gpe-header .header-app-values tbody td {
+  padding-top: 0.625rem;
+  width: 12.5%;
+  padding: 0.3125rem 1.25rem 1.25rem 1.25rem;
+}
+.gpe-header .header-app-values tbody td.header-app-values-fee {
+  background: #14b4fc;
+}
+
+.gpe-sections input[type="text"],
+.gpe-sections input[type="number"] {
+  border: 0;
+  border-bottom: 1px solid #e9e9e9;
+  outline: 0;
+  padding: 0.625rem;
+  color: #333;
+}
+
+.gpe-sections-fields-label {
+  display: block;
+  flex: 1 0 100%;
+}
+
 /* ==========================================================================
    Pages
    ========================================================================== */

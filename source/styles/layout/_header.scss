@@ -1,0 +1,40 @@
+.gpe-header {
+  background: map-get($colors, blue);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+
+  .header-app-values {
+    width: 100%;
+    text-align: center;
+
+    thead {
+      color: map-get($colors, white);
+
+      td {
+        text-transform: uppercase;
+        font-weight: bold;
+        padding: rem(20px) rem(20px) rem(5px) rem(20px);
+
+        &.header-app-values-fee {
+          background: lighten(map-get($colors, blue), 5%);
+        }
+      }
+    }
+
+    tbody {
+      color: lighten(map-get($colors, blue), 35%);
+
+      td {
+        padding-top: rem(10px);
+        width: 12.5%;
+        padding: rem(5px) rem(20px) rem(20px) rem(20px);
+
+        &.header-app-values-fee {
+          background: lighten(map-get($colors, blue), 5%);
+        }
+      }
+    }
+  }
+}

@@ -15,9 +15,9 @@
           <td>Comissão</td>
           <td>Taxas</td>
           <td>Total</td>
-          <td>Fee</td>
-          <td>Fee Taxa</td>
-          <td>Fee + Taxa</td>
+          <td class="header-app-values-fee">Fee</td>
+          <td class="header-app-values-fee">Fee Taxa</td>
+          <td class="header-app-values-fee">Fee + Taxa</td>
         </tr>
       </thead>
       <tbody>
@@ -27,29 +27,31 @@
           <td>{{ getTgComission() | currency }}</td>
           <td>{{ getTgTaxes() | currency }}</td>
           <td>{{ getTgTotal() | currency }}</td>
-          <td>{{ getTgTotal() | currency }}</td>
-          <td>{{ getTgTotal() | currency }}</td>
-          <td>{{ getTgTotal() | currency }}</td>
+          <td class="header-app-values-fee">{{ getTgFee() | currency }}</td>
+          <td class="header-app-values-fee">{{ getFeeTaxes() | currency }}</td>
+          <td class="header-app-values-fee">{{ getFeeWithTaxes() | currency }}</td>
         </tr>
       </tbody>
     </table>
   </header>
 
-  <main class="gpe-content">
+  <main class="gpe-content flex wrap">
 
     <section class="tp gpe-sections" tp-directive>
       <header class="tp-header gpe-sections-header">
         <h2 class="gpe-sections-header-title">Third Party</h2>
       </header>
       <div class="gpe-sections-content">
-        <div class="gpe-sections-fields v-center" ng-repeat="item_tp in tp">
-          <input type="number" ng-model="item_tp.value" placeholder="Valor">
-          <nav class="gpe-sections-fields-actions">
-            <a ng-click="addTp()" class="gpe-sections-item-actions-add">[ + ]</a> <a ng-click="removeTp( $index )" class="gpe-sections-item-actions-remove" ng-class="{'show' : $index }">[ x ]</a>
-          </nav>
+        <div class="form-fields flex v-center">
+          <label>Comissão:</label>
+          <input type="number" ng-model="comission" placeholder="0"> %
         </div>
-        <div class="gpe-sections-fields">
-          <input type="number" ng-model="comission" placeholder="Comissão"> %
+        <div class="form-fields flex v-center" ng-repeat="item_tp in tp">
+          <label>Valor:</label>
+          <input type="number" ng-model="item_tp.value" placeholder="R$">
+          <nav class="gpe-sections-fields-actions">
+            <a ng-click="addTp()" class="gpe-button add gpe-sections-item-actions-add">+</a> <a ng-click="removeTp( $index )" class="gpe-button remove gpe-sections-item-actions-remove" ng-class="{'show' : $index }">x</a>
+          </nav>
         </div>
       </div>
     </section>
@@ -59,39 +61,57 @@
         <h2 class="gpe-sections-header-title">Oop</h2>
       </header>
       <div class="gpe-sections-content">
-        <div class="gpe-sections-fields v-center" ng-repeat="item_oop in oop">
-          <input type="number" ng-model="item_oop.value" placeholder="Valor">
-          <nav class="gpe-sections-fields-actions">
-            <a ng-click="addOop()" class="gpe-sections-item-actions-add">[ + ]</a> <a ng-click="removeOop( $index )" class="gpe-sections-item-actions-remove" ng-class="{'show' : $index }">[ x ]</a>
-          </nav>
+        <div class="flex wrap">
+          <div class="form-fields flex v-center column">
+            <label>Comissão:</label>
+            <input type="number" ng-model="oop_comission" placeholder="0"> %
+          </div>
+          <div class="form-fields flex v-center column">
+            <label>Taxa:</label>
+            <input type="number" ng-model="oop_taxes" placeholder="0"> %
+          </div>
         </div>
-        <div class="gpe-sections-fields v-center">
-          <input type="number" ng-model="oop_comission" placeholder="Comissão"> %
-        </div>
-
-        <div class="gpe-sections-fields v-center">
-          <input type="number" ng-model="oop_taxes" placeholder="Taxas"> %
+        <div class="flex wrap">
+          <div class="form-fields flex v-center" ng-repeat="item_oop in oop">
+            <label>Valor:</label>
+            <input type="number" ng-model="item_oop.value" placeholder="R$">
+            <nav class="gpe-sections-fields-actions">
+              <a ng-click="addOop()" class="gpe-button add gpe-sections-item-actions-add">+</a> <a ng-click="removeOop( $index )" class="gpe-button remove gpe-sections-item-actions-remove" ng-class="{'show' : $index }">x</a>
+            </nav>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="oop gpe-sections" oop-directive>
+    <section class="fee gpe-sections" fee-directive>
       <header class="tp-header gpe-sections-header">
         <h2 class="gpe-sections-header-title">Fee</h2>
       </header>
       <div class="gpe-sections-content">
-        <div class="gpe-sections-fields v-center" ng-repeat="item_oop in oop">
-          <input type="number" ng-model="item_oop.value" placeholder="Valor">
-          <nav class="gpe-sections-fields-actions">
-            <a ng-click="addOop()" class="gpe-sections-item-actions-add">[ + ]</a> <a ng-click="removeOop( $index )" class="gpe-sections-item-actions-remove" ng-class="{'show' : $index }">[ x ]</a>
-          </nav>
+        <div class="form-fields flex v-center">
+          <label>Taxas:</label>
+          <input type="number" ng-model="fee_taxes" placeholder="0"> %
         </div>
-        <div class="gpe-sections-fields v-center">
-          <input type="number" ng-model="oop_comission" placeholder="Comissão"> %
-        </div>
-
-        <div class="gpe-sections-fields v-center">
-          <input type="number" ng-model="oop_taxes" placeholder="Taxas"> %
+        <div class="flex wrap" ng-repeat="item_fee in fee">
+          <div class="form-fields flex wrap v-center column">
+            <label class="label">Departamento:</label>
+            <input type="text" ng-model="item_fee.dep" placeholder="">
+          </div>
+          <div class="form-fields flex wrap v-center column">
+            <label class="label">Hourly Rate:</label>
+            <input type="number" ng-model="item_fee.hr" placeholder="R$">
+          </div>
+          <div class="form-fields flex wrap v-center column">
+            <label class="label">Horas:</label>
+            <input type="number" ng-model="item_fee.hours" placeholder="0">
+          </div>
+          <div class="form-fields flex wrap v-center column">
+            <label class="label">Budget:</label>
+            {{ getBudget($index) | currency }}
+            <nav class="gpe-sections-fields-actions">
+              <a ng-click="addFee()" class="gpe-button add gpe-sections-item-actions-add">+</a> <a ng-click="removeFee( $index )" class="gpe-button remove gpe-sections-item-actions-remove" ng-class="{'show' : $index }">x</a>
+            </nav>
+          </div>
         </div>
       </div>
     </section>
